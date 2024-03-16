@@ -1,0 +1,40 @@
+{
+	"manifest_version": 3,
+	"name": "Spotify Tracker",
+	"version": "1.0",
+	"description": "Spotify Tracker",
+	"action": {
+		"default_popup": "popup.html"
+	},
+	"permissions": [
+		"webRequest"
+	],
+	"host_permissions": [
+		"*://*.spotify.com/*"
+	],
+	"background": {
+		"service_worker": "./js/worker.js"
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"*://*.spotify.com/*"
+			],
+			"run_at": "document_start",
+			"js": [
+				"./js/content.js",
+				"./js/inject.js"
+			]
+		}
+	],
+	"web_accessible_resources": [
+		{
+			"resources": [
+				"js/injected.js"
+			],
+			"matches": [
+				"*://*.spotify.com/*"
+			]
+		}
+	]
+}
